@@ -23,7 +23,7 @@ class ArticleController
     // Note: this function can also be used in a repository - the choice is yours
     private function getArticles()
     {
-        $find = "SELECT * FROM todolist";
+        $find = "SELECT * FROM article";
         // TODO: prepare the database connection
         $sendQuery = $this->databaseManager->connection->prepare($find);
         $sendQuery->execute();
