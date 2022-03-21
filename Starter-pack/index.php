@@ -15,6 +15,7 @@ require 'Controller/HomepageController.php';
 require 'Controller/ArticleController.php';
 require_once './Controller/dataBaseManagerController.php';
 
+var_dump($config);
 // make a connection
 $databaseManager = new DatabaseManager($config['host'], $config['user'], $config['password'], $config['dbname']);
 $databaseManager->connect();
