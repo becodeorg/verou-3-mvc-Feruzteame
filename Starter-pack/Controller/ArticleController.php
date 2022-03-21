@@ -18,6 +18,7 @@ class ArticleController
         $articles = $this->getArticles();
         // Load the view
         require 'View/articles/index.php';
+
     }
 
     // Note: this function can also be used in a repository - the choice is yours
@@ -27,9 +28,9 @@ class ArticleController
         // TODO: prepare the database connection
         $sendQuery = $this->databaseManager->connection->prepare($find);
         $sendQuery->execute();
-        // TODO: fetch all articles as $rawArticles (as a simple array)
-        return $sendQuery->fetchAll(PDO::FETCH_ASSOC);
-        $rawArticles = [];
+        //TODO: fetch all articles as $rawArticles (as a simple array)
+        $result =  $sendQuery->fetchAll(PDO::FETCH_ASSOC);
+        $rawArticles = $result;
 
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
@@ -38,10 +39,13 @@ class ArticleController
         }
 
         return $articles;
+
     }
 
     public function show()
     {
+
+
         // TODO: this can be used for a detail page
     }
 }
