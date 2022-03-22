@@ -9,10 +9,10 @@ require 'View/includes/header.php'
         <?php foreach ($articles as $article) : ?>
         <ul>
             <li>
-                <p><?= $article->title ?></p>
-                <p><?= $article->formatPublishDate() ?></p>
-                <p><a href="">Detail</a></p>
-
+                <a href="index.php?page=articles-show&id=<?= $article->id ?>">
+                  <p><?= $article->title ?></p>
+                </a>
+                <p><?= $article->formatPublishDate()?></p>
             </li>
         </ul>
         <?php endforeach; ?>

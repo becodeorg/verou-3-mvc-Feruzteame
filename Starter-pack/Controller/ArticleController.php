@@ -31,11 +31,11 @@ class ArticleController
         //TODO: fetch all articles as $rawArticles (as a simple array)
         $result =  $sendQuery->fetchAll(PDO::FETCH_ASSOC);
         $rawArticles = $result;
-
-        $articles = [];
+         $articles = [];
         foreach ($rawArticles as $rawArticle) {
             // We are converting an article from a "dumb" array to a much more flexible class
-            $articles[] = new Article($rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
+            $articles[] = new Article($rawArticle['id'],$rawArticle['title'], $rawArticle['description'],
+                          $rawArticle['publish_date']);
         }
 
         return $articles;
@@ -44,8 +44,15 @@ class ArticleController
 
     public function show()
     {
+        $find = "SELECT * FROM article WHERE id={$_GET["id"]}";
+        // TODO: prepare the database connection
+        $sendQuery = $this->databaseManager->connection->prepare($find);
+        $sendQuery->execute();
+        //TODO: fetch all articles as $rawArticles (as a simple array)
+        $result =  $sendQuery->fetch();
+        $article = new Article($result['id'],$result['title'], $result['description'],
+                      $result['publish_date']);
 
-
-        // TODO: this can be used for a detail page
+        require 'View/articles/show.php';
     }
 }

@@ -1,4 +1,4 @@
-<?php require 'View/includes/header.php'?>
+<?php require 'View/includes/header.php' ?>
 
    // Use any data loaded in the controller here
 
