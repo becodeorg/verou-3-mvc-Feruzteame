@@ -55,4 +55,33 @@ class ArticleController
 
         require 'View/articles/show.php';
     }
+
+    public function next()
+    {
+        $current_id = $_GET["id"];
+        $query = "SELECT * FROM article WHERE id >  $current_id ORDER BY Id ASC LIMIT 1";
+        $this->queryAndInitializeModel($query);
+    }
+
+    public function prev()
+    {
+        $current_id = $_GET["id"];
+        $query = "SELECT * FROM article WHERE id <  $current_id ORDER BY Id DESC LIMIT 1";
+        $this->queryAndInitializeModel($query);
+    }
+
+    private function queryAndInitializeModel(string $query): void
+    {
+        $sendQuery = $this->databaseManager->connection->prepare($query);
+        $sendQuery->execute();
+        $result = $sendQuery->fetch();
+        if (!is_bool($result)) {
+            $article = new Article($result['id'], $result['title'], $result['description'],
+                $result['publish_date']);
+            require 'View/articles/show.php';
+        } else {
+            $query = "SELECT * FROM article WHERE id={$_GET["id"]}";
+            $this->queryAndInitializeModel($query);
+        }
+    }
 }
