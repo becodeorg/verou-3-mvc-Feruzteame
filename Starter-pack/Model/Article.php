@@ -18,8 +18,8 @@ class Article
     public function formatPublishDate($format = 'DD-MM-YYYY')
     {
     // TODO: return the date in the required format
-        $date = date_create('2000-01-01');
-        echo date_format($date, 'Y-m-d');
+        $date = date_create($this->publishDate);
+        echo date_format($date, 'd-m-Y');
 
     }
 }

@@ -10,7 +10,9 @@ require 'View/includes/header.php'
         <ul>
             <li>
                 <p><?= $article->title ?></p>
-                <?= $article->formatPublishDate() ?>
+                <p><?= $article->formatPublishDate() ?></p>
+                <p><a href="">Detail</a></p>
+
             </li>
         </ul>
         <?php endforeach; ?>
